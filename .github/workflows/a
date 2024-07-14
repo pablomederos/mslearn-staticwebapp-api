@@ -1,0 +1,22 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: AzureStaticWebApp@0
+    displayName: 'Application build & Deploy'
+    inputs:
+      app_location: 'angular-app'
+      app_build_command: 'npm run build'
+      output_location: 'dist/angular-app'
+      api_location: 'api'
+      config_file_location: 'angular-app'
+      skip_api_build: true
+      azure_static_web_apps_api_token: '$(azure_web_app_token)'
